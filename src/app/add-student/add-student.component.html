@@ -1,0 +1,107 @@
+<h3>Add-Student</h3>
+<div class="form-group">
+
+  <form [formGroup]="AddStudentForm" (ngSubmit)="onsubmit()">
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Name" formControlName="FullName" />
+
+        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)" class="alert alert-danger mt-1">
+          <div *ngIf="Name?.errors?.['required']">
+            <span>Name is required.</span> 
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Father Name" formControlName="FatherName">
+        <div *ngIf="FatherName?.invalid && (FatherName?.dirty || FatherName?.touched)" class="alert alert-danger mt-1">
+          <div *ngIf="FatherName?.errors?.['required']">
+            <span>FatherName is required.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <input type="date" class="form-control" placeholder="Dob" formControlName="Dob" />
+
+        <div *ngIf="Dob?.invalid && (Dob?.dirty || Dob?.touched)" class="alert alert-danger mt-1">
+          <div *ngIf="Dob?.errors?.['required']">
+            <span>Dob is required.</span> 
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <select type="text" placeholder="Gender" class="form-control" formControlName="Gender">
+          <option>Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <input type="text" placeholder="Mobile Number" class="form-control" formControlName="Mobile">
+      </div>
+
+      <div class="col-md-6">
+        <input type="text" placeholder="Email" class="form-control" formControlName="Email">
+      </div>
+
+    </div>
+
+    <div class="row mb-3">
+     <div class="col-md-4">
+    <select class="form-control" formControlName="StateId" (change)="onStateChange($event)">
+      <option value="">Select State</option>
+      <option *ngFor="let state of States" [value]="state.id">
+        {{ state.stateName }}
+      </option>
+    </select>
+
+    <div class="text-danger"
+         *ngIf="AddStudentForm.get('StateId')?.invalid && AddStudentForm.get('StateId')?.touched">
+      State is required
+    </div>
+  </div>
+
+
+      <div class="col-md-4">
+        <select required id="DistrictId" class="form-control" formControlName="DistrictId">
+          <option>Select District</option>
+          <option *ngFor="let city of Cities" [value]="city.id">{{city.cityName}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <select required id="Cityid" class="form-control" formControlName="CityId">
+          <option>Select Cityid</option>
+          <option *ngFor="let city of Cities" [value]="city.id">{{city.cityName}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-12">
+      <div class="col-md-12">
+        <input type="text" placeholder="PinCode" class="form-control" formControlName="Pincode">
+      </div>
+
+
+    </div>
+    <div class="col-md-12">
+      <textarea placeholder="Address" id="Address" class="form-control" formControlName="Address"></textarea>
+    </div>
+    <br>
+    <div class="col-sm-12 ASButton">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,79 @@
+.StudentlistClass{
+    display: flex;
+    justify-content: space-between;
+}
+.StudentlistClass button a{
+    color: #fff;
+}
+
+     .voter-container {
+     padding: 20px;
+     background: #f4f6f9;
+     font-family: Arial, sans-serif;
+ }
+
+ .voter-container h2 {
+     text-align: center;
+     margin-bottom: 15px;
+ }
+
+ .voter-table {
+     width: 100%;
+     border-collapse: collapse;
+     background: #fff;
+ }
+
+ .voter-table th,
+ .voter-table td {
+     padding: 10px;
+     border: 1px solid #ddd;
+     text-align: center;
+     font-size: 14px;
+ }
+
+ .voter-table th {
+     background: #1e3c72;
+     color: #fff;
+ }
+
+ .voter-table tr:nth-child(even) {
+     background: #f9f9f9;
+ }
+
+ .voter-table tr:hover {
+     background: #eef3ff;
+ }
+
+ .active {
+     color: green;
+     font-weight: bold;
+ }
+
+ .btn-view {
+     background: #17a2b8;
+     color: #fff;
+     border: none;
+     padding: 5px 8px;
+     cursor: pointer;
+ }
+
+ .btn-edit {
+     background: #ffc107;
+     color: #000;
+     border: none;
+     padding: 5px 8px;
+     cursor: pointer;
+ }
+
+ .btn-delete {
+     background: #dc3545;
+     color: #fff;
+     border: none;
+     padding: 5px 8px;
+     cursor: pointer;
+ }
+
+ a {
+     border-radius: 4px;
+     margin: 2px;
+ }

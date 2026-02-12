@@ -1,0 +1,61 @@
+<div class="StudentlistClass">
+  <div class="row form-group">
+    <div class="col-sm-3">
+      <input type="text" class="form-control" placeholder="Name">
+    </div>
+    <div class="col-sm-3">
+      <input type="text" class="form-control col-sm-4" placeholder="Email">
+    </div>
+
+    <div class="col-sm-3">
+      <button class="btn btn-primary">Search</button>
+    </div>
+
+  </div>
+  <button class="btn btn-primary"><a routerLink="Create">Create</a></button>
+</div>
+
+<br>
+<br>
+
+
+<table class="voter-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>EPIC No</th>
+      <th>Full Name</th>
+      <th>Gender</th>
+      <th>Mobile</th>
+      <th>State</th>
+      <th>District</th>
+      <th>Constituency</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let vtr of VotersList; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{vtr.epicNumber}}</td>
+      <td>{{vtr.fullName}}</td>
+      <td>{{vtr.gender}}</td>
+      <td>{{vtr.mobile}}</td>
+      <td>{{vtr.stateName}}</td>
+      <td>{{vtr.districtName}}</td>
+      <td>{{vtr.cityName}}</td>
+      <td class="active">Active</td>
+      <td>
+        
+        <!-- <button class="btn-edit"><a [routerLink]="['/Edit']" [queryParams]="{id:vtr.id}">Edit</a></button> -->
+         <a [routerLink]="['Edit',{id:vtr.id}]" class="btn-edit">Edit</a>
+        <a href="#" class="btn-delete">Delete</a>
+      </td>
+    </tr>
+
+    <tr *ngIf="VotersList==null">
+      <td colspan="10" class="text-center">No Records Found</td>
+    </tr>
+  </tbody>
+</table>
