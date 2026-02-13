@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
+import { Voter } from '../Model/VoterList';
+import { APIService } from '../Service/api.service';
+
 
 @Component({
   selector: 'app-edit-student',
@@ -7,18 +10,28 @@ import { ActivatedRoute, Route } from '@angular/router';
   templateUrl: './edit-student.component.html',
   styleUrl: './edit-student.component.css'
 })
+
+
 export class EditStudentComponent {
-  
-// ngonInit(){
-//   this.route.queryParams.subscribe(params => {
-//     console.log(params['id']);
-//    });
-// }
-constructor(private route:ActivatedRoute){}
+
+  voter!: Voter | null
+Id:number|0=0
+constructor(
+  private route: ActivatedRoute,
+  private apiService: APIService
+) {}
+
 ngOnInit()
 {
-  console.log(this.route.snapshot.paramMap.get('id'));
-  
+  this.Id = Number(this.route.snapshot.paramMap.get('id'));
+  this.apiService.GetBYId(this.Id).subscribe({
+    next:(res)=>{
+      this.voter=res
+    },
+    error:(err)=>{
+      console.error(err);
+    }
+  })
 }
 
 }

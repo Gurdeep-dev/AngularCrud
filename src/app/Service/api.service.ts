@@ -1,65 +1,80 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Voter, VoterRequest} from '../Model/VoterList'
+import { Voter, VoterRequest } from '../Model/VoterList';
 import { Login } from '../Model/Token';
 import { Cities, States } from '../Model/Location';
-import { formatCurrency } from '@angular/common';
 
-Injectable({
+@Injectable({
   providedIn: 'root'
 })
-let token:string|null=null;
-token=localStorage.getItem('token');
 export class APIService {
 
   private baseUrl = 'https://localhost:3000/api';
+
   constructor(private http: HttpClient) { }
 
-  //post Token
+  private getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
+  // Post Token
   LoginToken(login: Login): Observable<any> {
-  return this.http.post<any>(
-    `${this.baseUrl}/Home/login`,
-    login
-  );
+    return this.http.post<any>(
+      `${this.baseUrl}/Home/login`,
+      login
+    );
+  }
 
-}
-
-  GetVoterList(Req:VoterRequest):Observable<Voter[]>{
-    const token = localStorage.getItem('token');
-
+  GetVoterList(req: VoterRequest): Observable<Voter[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`  
+      'Authorization': `Bearer ${this.getToken()}`
     });
-    return this.http.post<Voter[]>(`${this.baseUrl}/Home/GetVoterList`,Req,{headers})
+
+    return this.http.post<Voter[]>(
+      `${this.baseUrl}/Home/GetVoterList`,
+      req,
+      { headers }
+    );
   }
 
-  //GetState
-  GetStateLsit():Observable<States[]>{
-    return this.http.get<States[]>(`${this.baseUrl}/Home/GetState`)
+  // Get State
+  GetStateLsit(): Observable<States[]> {
+    return this.http.get<States[]>(
+      `${this.baseUrl}/Home/GetState`
+    );
   }
 
-GetCityList(id:number):Observable<Cities[]>{
-  return this.http.post<Cities[]>(`${this.baseUrl}/Home/GetCityById?Id=${id}`,id)
-}
+  GetCityList(id: number): Observable<Cities[]> {
+    return this.http.post<Cities[]>(
+      `${this.baseUrl}/Home/GetCityById?Id=${id}`,
+      id
+    );
+  }
 
-SaveVoterData(fromdata:Voter):Observable<any>{
-      const token = localStorage.getItem('token');
-  const headers= new HttpHeaders({
-     'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`  
-  });
-  return this.http.post<any>(`${this.baseUrl}/Home/AddVoter`,fromdata,{headers})
-}
+  SaveVoterData(formData: Voter): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.getToken()}`
+    });
 
-GetBYId(Id:number):Observable<Voter>{
-  const headers= new HttpHeaders({
-     'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`  
-  })
-  return this.http.post<Voter>(`${this.baseUrl}/home`,Id)
-}
+    return this.http.post<any>(
+      `${this.baseUrl}/Home/AddVoter`,
+      formData,
+      { headers }
+    );
+  }
 
+  GetBYId(id: number): Observable<Voter> {
+    console.log(id);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+
+    return this.http.post<Voter>(
+      `${this.baseUrl}/Home/VoterGetById?Id=${id}`,null,{ headers }
+    );
+  }
 }
